@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import os
 from matplotlib import pyplot as plt
-import time
 import mediapipe as mp
 
 mp_holistic = mp.solutions.holistic  # Holistic model
@@ -14,7 +13,7 @@ def mediapipe_detection(image, model):
     image.flags.writeable = False  # Image is no longer writeable
     results = model.process(image)  # Make prediction
     image.flags.writeable = True  # Image is now writeable
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # COLOR COVERSION RGB 2 BGR
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # COLOR CONVERSION RGB 2 BGR
     return image, results
 
 
@@ -80,28 +79,6 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
 
 def main():
     plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-# def main():
-#     # Open the default camera
-#     cap = cv2.VideoCapture(0)
-#
-#     while True:
-#         # Read the camera frame
-#         ret, frame = cap.read()
-#
-#         if not ret:
-#             break
-#
-#         # Display the frame
-#         cv2.imshow('Camera', frame)
-#
-#         # Break the loop if 'q' is pressed
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
-#
-#     # Release the camera and close the window
-#     cap.release()
-#     cv2.destroyAllWindows()
-#
-#
+
 if __name__ == '__main__':
     main()
